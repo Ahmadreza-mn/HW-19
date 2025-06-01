@@ -1,0 +1,36 @@
+package org.example.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import org.example.model.base.BaseEntity;
+import org.example.model.enums.RegisterState;
+
+import java.time.LocalDate;
+
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name =  "users", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
+@DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)
+public class User extends BaseEntity<Long> {
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    private String username;
+    private String password;
+    private String email;
+    private LocalDate dob;
+    @Enumerated(EnumType.STRING)
+    private RegisterState registerState;
+    @ManyToOne
+    private Role role;
+}
