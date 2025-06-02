@@ -27,14 +27,15 @@ public class Question extends BaseEntity<Long> {
 
     @Column(nullable = false, name = "qustion_text")
     private String questionText;
-
-    private Double defaultScore;
-
+    @Column(nullable = false)
+    private Double score;
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<QuestionExam> questionExams = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "COURSE_ID")
     private Course course;
+    @Column(nullable = false)
+    private boolean deleted = false;
 
 }

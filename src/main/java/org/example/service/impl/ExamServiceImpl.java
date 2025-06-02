@@ -4,7 +4,7 @@ import org.example.dto.ExamDto;
 import org.example.model.DescriptiveQuestion;
 import org.example.model.Exam;
 import org.example.model.MultipleChoiceQuestion;
-import org.example.repository.ExamRepository;
+import org.example.repository.base.ExamRepository;
 import org.example.service.ExamService;
 
 import java.util.List;

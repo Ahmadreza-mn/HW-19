@@ -2,7 +2,7 @@ package org.example.service.impl;
 
 import org.example.dto.answerdto.DescriptiveAnswerDto;
 import org.example.dto.answerdto.MultipleChoiceAnswerDto;
-import org.example.repository.AnswerRepository;
+import org.example.repository.base.AnswerRepository;
 import org.example.service.AnswerService;
 
 import java.util.Map;

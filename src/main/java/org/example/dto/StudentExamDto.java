@@ -2,12 +2,14 @@ package org.example.dto;
 
 import lombok.*;
 
-@Builder
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class StudentExamDto {
     private Long studentId;
     private Long examId;
+    private LocalDateTime startTime;
 }

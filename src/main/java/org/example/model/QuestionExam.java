@@ -1,9 +1,6 @@
 package org.example.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,22 +11,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@SuperBuilder
-public class QuestionExam extends BaseEntity<Long> {
+@Table(name = "question_exam")
+public class QuestionExam {
 
-    @ManyToOne
-    @JoinColumn(name = "question_id", nullable = false)
-    private Question question;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @ManyToOne
+
+    @Setter
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exam_id", nullable = false)
     private Exam exam;
 
-    private Double questionScore;
 
-    @OneToMany(mappedBy = "questionExam")
-    private List<Answer> answers = new ArrayList<>();
+    @Setter
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "question_id", nullable = false)
+    private Question question;
+
+
+    @Setter
+    private Integer questionOrder;
+
+
+    public QuestionExam() {}
+
+    public QuestionExam(Exam exam, Question question, Integer questionOrder) {
+        this.exam = exam;
+        this.question = question;
+        this.questionOrder = questionOrder;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public Exam getExam() {
+        return exam;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public Integer getQuestionOrder() {
+        return questionOrder;
+    }
+
 }

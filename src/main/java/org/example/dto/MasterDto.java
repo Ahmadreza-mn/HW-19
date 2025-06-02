@@ -22,10 +22,15 @@ public class MasterDto {
     @Size(min = 2, max = 30, message = "Last name must be between 2 and 30 characters")
     private String lastName;
 
+    // Getters and setters
+    @Setter
+    @Getter
     @NotBlank(message = "Username cannot be empty")
     @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
     private String username;
 
+    @Setter
+    @Getter
     @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
 
@@ -35,4 +40,10 @@ public class MasterDto {
 
     @Past(message = "Date of birth must be in the past")
     private LocalDate dob;
+
+
+    @Setter
+    @Getter
+    private String fullName;
+
 }

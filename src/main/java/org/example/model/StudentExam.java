@@ -5,28 +5,37 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
-import org.example.model.base.BaseEntity;
-import org.example.model.enums.StudentExamStatus;
 
-import java.time.LocalDateTime;
+
 
 @Entity
+@Table(name = "student_exam_scores", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"student_id", "exam_id"})
+})
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
-public class StudentExam extends BaseEntity<Long> {
-    @ManyToOne
+public class StudentExam {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exam_id", nullable = false)
     private Exam exam;
-    @Enumerated(EnumType.STRING)
-    private StudentExamStatus studentExamStatus;
-    private LocalDateTime startedAt;
-    private LocalDateTime endAt;
-    private Double examScoreForStudent;
+
+    @Column(nullable = false)
+    private Double totalScore = 0.0;
+
+
+    @Setter
+    @Getter
+    private boolean submitted;
+
 }

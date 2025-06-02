@@ -13,40 +13,31 @@ import org.example.model.base.BaseEntity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name = "courses")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
-public class Course extends BaseEntity<Long> {
-    @NotNull
-    @NotEmpty(message = "Course should has title")
+@AllArgsConstructor
+public class Course {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String title;
-    private int unit;
-
-    @Column(name = "START_COURSE_DATE")
-
-    private LocalDate courseStartedDate;
-
-    @Column(name = "FINISHED_COURSE_DATE")
-
-    private LocalDate courseFinishedDate;
-
-    @ManyToOne
-    @JoinColumn(name = "MASTER_ID")
-    private Master master;
 
     @ManyToMany
-    @JoinTable(name = "STUDENT_COURSE")
-    private List<Student> students = new ArrayList<>();
+    @JoinTable(name = "student_courses",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id"))
+    private Set<Student> students = new HashSet<>();
 
-    @OneToMany(mappedBy = "course")
-    private List<Exam> exams = new ArrayList<>();
-
-    @OneToMany(mappedBy = "course")
-    private List<Question> questions = new ArrayList<>();
-
+    @ManyToOne
+    @JoinColumn(name = "master_id")
+    private Master master;
 }

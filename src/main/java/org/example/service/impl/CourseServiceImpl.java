@@ -5,7 +5,7 @@ import org.example.dto.questiondto.DeleteQuestionFromQuestionBankDto;
 import org.example.model.Course;
 import org.example.model.DescriptiveQuestion;
 import org.example.model.MultipleChoiceQuestion;
-import org.example.repository.CourseRepository;
+import org.example.repository.base.CourseRepository;
 import org.example.service.CourseService;
 
 import java.util.List;

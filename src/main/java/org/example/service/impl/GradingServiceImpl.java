@@ -1,6 +1,6 @@
 package org.example.service.impl;
 
-import org.example.repository.GradingRepository;
+import org.example.repository.base.GradingRepository;
 import org.example.service.GradingService;
 
 import java.util.Map;

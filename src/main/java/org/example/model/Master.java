@@ -1,9 +1,6 @@
 package org.example.model;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,15 +10,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@SuperBuilder
-@PrimaryKeyJoinColumn(name="user_id", referencedColumnName = "id")
-@DiscriminatorValue("MASTER")
-public class Master extends User {
-    @OneToMany(mappedBy = "master")
-    private List<Course> courses = new ArrayList<>();
-    @OneToMany(mappedBy = "master")
-    private List<Exam> exams = new ArrayList<>();
+@Table(name = "masters")
+public class Master {
+
+    @Getter
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Getter
+    @Setter
+    @Column(unique = true, nullable = false)
+    private String username;
+
+    @Getter
+    @Setter
+    @Column(nullable = false)
+    private String password;
+
+    @Getter
+    @Setter
+    private String fullName;
+
+    @Getter
+    @Setter
+    @OneToMany(mappedBy = "master", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Course> courses;
+
+
+    public Master() {
+    }
+
+
+
+
 }

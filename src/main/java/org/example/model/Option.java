@@ -11,23 +11,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@SuperBuilder
 @Table(name = "options")
-public class Option extends BaseEntity<Long> {
-    @Column(nullable = false)
-    private String optionText;
+public class Option {
 
-    @Column(nullable = false)
-    private boolean isCorrect;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @ManyToOne
+    @Setter
+    private String text;
+
+    @Setter
+    private boolean correct;
+
+    @Setter
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
     private MultipleChoiceQuestion question;
 
-    @OneToMany(mappedBy = "option")
-    private List<MultipleChoiceAnswer> answers = new ArrayList<>();
+
+    public Option() {}
+
+    public Option(String text, boolean correct, MultipleChoiceQuestion question) {
+        this.text = text;
+        this.correct = correct;
+        this.question = question;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public boolean isCorrect() {
+        return correct;
+    }
+
+    public MultipleChoiceQuestion getQuestion() {
+        return question;
+    }
 
 }
