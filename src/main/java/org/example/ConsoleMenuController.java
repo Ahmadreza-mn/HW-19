@@ -114,13 +114,13 @@ public class ConsoleMenuApp {
             System.out.println("student not found");
             return;
         }
-
         Student student = studentOpt.get();
 
         while (true) {
             System.out.println("1. list exams");
             System.out.println("2. completed exams");
-            System.out.println("3. logout");
+            System.out.println("3. take exam");  // NEW option
+            System.out.println("4. logout");
             String option = scanner.nextLine();
 
             switch (option) {
@@ -140,6 +140,9 @@ public class ConsoleMenuApp {
                     }
                 }
                 case "3" -> {
+                    takeExam(student);
+                }
+                case "4" -> {
                     System.out.println("logout");
                     return;
                 }
@@ -148,6 +151,74 @@ public class ConsoleMenuApp {
         }
     }
 
+    private static void takeExam(Student student) {
+        List<Exam> exams = examRepository.findAll();
+        System.out.println("Available exams:");
+        for (Exam exam : exams) {
+            System.out.println(exam.getId() + ": " + exam.getName());
+        }
+        System.out.print("Enter exam ID to take: ");
+        String examIdStr = scanner.nextLine();
+
+        Long examId;
+        try {
+            examId = Long.parseLong(examIdStr);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid exam ID.");
+            return;
+        }
+
+        Optional<Exam> examOpt = examRepository.findById(examId);
+        if (examOpt.isEmpty()) {
+            System.out.println("Exam not found.");
+            return;
+        }
+        Exam exam = examOpt.get();
+
+
+        Optional<StudentExam> existing = studentExamRepository.findByStudentAndExam(student.getId(), examId);
+        if (existing.isPresent() && existing.get().isSubmitted()) {
+            System.out.println("You have already completed this exam.");
+            return;
+        }
+
+
+        List<Question> questions = questionRepository.findByExamId(examId);
+        if (questions.isEmpty()) {
+            System.out.println("No questions found for this exam.");
+            return;
+        }
+
+        Map<Long, String> studentAnswers = new HashMap<>();
+        for (Question q : questions) {
+            System.out.println("Q" + q.getId() + ": " + q.getText());
+
+            List<String> options = q.getOptions();
+            for (int i = 0; i < options.size(); i++) {
+                System.out.println((i + 1) + ") " + options.get(i));
+            }
+            System.out.print("Your answer (number): ");
+            String ans = scanner.nextLine();
+            studentAnswers.put(q.getId(), ans);
+        }
+
+
+        StudentExam studentExam = existing.orElseGet(() -> new StudentExam(student, exam));
+        studentExam.setSubmitted(true);
+        studentExamRepository.save(studentExam);
+
+
+        double score = gradeExam(questions, studentAnswers);
+
+
+        Grading grading = new Grading();
+        grading.setStudent(student);
+        grading.setExam(exam);
+        grading.setScore(score);
+        gradingRepository.save(grading);
+
+        System.out.println("Exam completed! Your score: " + score);
+    }
     private static void managerMenu(User user) {
         System.out.println("manager panel");
         while (true) {
