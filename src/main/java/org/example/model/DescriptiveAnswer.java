@@ -28,4 +28,13 @@ public class DescriptiveAnswer extends Answer {
     @JoinColumn(name = "exam_id")
     private Exam exam;
 
+
+    @Getter
+    @Setter
+    private String text;
+    @Getter
+    @Setter
+    private String sampleAnswer;
+
+
 }

@@ -11,4 +11,7 @@ public class DescriptiveQuestionDto {
     private String title;
     private String questionText;
     private Double score;
+    private String sampleAnswer;
+    private String questionId;
+    private String text;
 }

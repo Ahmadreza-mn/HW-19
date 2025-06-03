@@ -17,5 +17,6 @@ public class MultipleChoiceQuestionDto {
     private String questionText;
     private Double defaultScore;
     private List<Option> options;
+    private String text;
+    private Integer correctOptionIndex;
 }
-

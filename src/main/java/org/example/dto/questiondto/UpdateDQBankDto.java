@@ -12,4 +12,8 @@ public class UpdateDQBankDto {
     private String title;
     private String questionText;
     private Double defaultScore;
+    @Setter
+    public String NewText;
+    public String NewSampleAnswer;
+
 }

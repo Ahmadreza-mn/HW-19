@@ -25,13 +25,13 @@ public class QuestionServiceImpl implements QuestionService {
         Exam exam = entityManager.find(Exam.class, examId);
 
         MultipleChoiceQuestion mcq = new MultipleChoiceQuestion();
-        mcq.setText(dto.getText());
+        mcq.setQuestionText(dto.getText());
         mcq.setCorrectOptionIndex(dto.getCorrectOptionIndex());
         mcq.setCourse(course);
 
         List<Option> options = dto.getOptions().stream().map(optText -> {
             Option option = new Option();
-            option.setText(optText);
+            option.setText(String.valueOf(optText));
             option.setQuestion(mcq);
             return option;
         }).toList();
@@ -49,7 +49,7 @@ public class QuestionServiceImpl implements QuestionService {
         Exam exam = entityManager.find(Exam.class, examId);
 
         DescriptiveQuestion dq = new DescriptiveQuestion();
-        dq.setText(dto.getText());
+        dq.setQuestionText(dto.getQuestionText());
         dq.setSampleAnswer(dto.getSampleAnswer());
         dq.setCourse(course);
 
@@ -78,13 +78,13 @@ public class QuestionServiceImpl implements QuestionService {
         Course course = entityManager.find(Course.class, courseId);
 
         MultipleChoiceQuestion mcq = new MultipleChoiceQuestion();
-        mcq.setText(dto.getText());
+        mcq.setQuestionText(dto.getText());
         mcq.setCorrectOptionIndex(dto.getCorrectOptionIndex());
         mcq.setCourse(course);
 
         List<Option> options = dto.getOptions().stream().map(optText -> {
             Option option = new Option();
-            option.setText(optText);
+            option.setText(String.valueOf(optText));
             option.setQuestion(mcq);
             return option;
         }).toList();
@@ -114,13 +114,13 @@ public class QuestionServiceImpl implements QuestionService {
         MultipleChoiceQuestion question = questionRepository.findMCQById(dto.getQuestionId())
                 .orElseThrow(() -> new RuntimeException("Question not found"));
 
-        question.setText(dto.getNewText());
-        question.setCorrectOptionIndex(dto.getCorrectIndex());
+        question.setQuestionText(dto.getNewText());
+        question.setCorrectOptionIndex(dto.getCorrectOptionIndex());
 
         question.getOptions().clear();
         List<Option> newOptions = dto.getOptions().stream().map(text -> {
             Option option = new Option();
-            option.setText(text);
+            option.setText(String.valueOf(text));
             option.setQuestion(question);
             return option;
         }).toList();
@@ -136,7 +136,7 @@ public class QuestionServiceImpl implements QuestionService {
         DescriptiveQuestion question = questionRepository.findDQById(dto.getQuestionId())
                 .orElseThrow(() -> new RuntimeException("Question not found"));
 
-        question.setText(dto.getNewText());
+        question.setQuestionText(dto.getNewText());
         question.setSampleAnswer(dto.getNewSampleAnswer());
         questionRepository.updateDQ(question);
         entityManager.getTransaction().commit();

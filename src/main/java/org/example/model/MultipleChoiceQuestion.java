@@ -21,9 +21,8 @@ public class MultipleChoiceQuestion extends Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Option> options = new ArrayList<>();
+
     private String correctOption;
-    @Id
-    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
@@ -32,11 +31,10 @@ public class MultipleChoiceQuestion extends Question {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exam_id")
     private Exam exam;
-    @ManyToOne
-    @JoinColumn(name = "question_id")
-    private MultipleChoiceQuestion question;
 
     @Column(nullable = false)
     private Integer score = 0;
-
+    private String questionText;
+    @Column(name = "correct_option_index")
+    private Integer correctOptionIndex;
 }

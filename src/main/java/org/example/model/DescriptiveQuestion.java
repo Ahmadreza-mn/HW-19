@@ -16,10 +16,11 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @DiscriminatorValue("DESCRIPTIVE")
 public class DescriptiveQuestion extends Question {
-    @Setter
-    @Getter
+
     @ManyToOne
     @JoinColumn(name = "exam_id")
     private Exam exam;
 
+    private String text;
+    private String sampleAnswer;
 }

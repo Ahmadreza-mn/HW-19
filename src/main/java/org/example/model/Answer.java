@@ -12,40 +12,47 @@ import org.example.model.base.BaseEntity;
 @Table(name = "answers")
 public class Answer {
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 
+    @Getter
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
 
+    @Getter
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exam_id", nullable = false)
     private Exam exam;
 
 
+    @Getter
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
 
+    @Getter
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "option_id")
     private Option selectedOption;
 
 
+    @Getter
     @Setter
     @Column(length = 2000)
     private String descriptiveAnswerText;
 
 
+    @Getter
     @Setter
     @Column(nullable = true)
     private Double score;
@@ -53,34 +60,11 @@ public class Answer {
 
     public Answer() {}
 
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public Exam getExam() {
-        return exam;
-    }
-
-    public Question getQuestion() {
-        return question;
-    }
-
-    public Option getSelectedOption() {
-        return selectedOption;
-    }
-
-    public String getDescriptiveAnswerText() {
-        return descriptiveAnswerText;
-    }
-
-    public Double getScore() {
-        return score;
-    }
+@Getter
+@Setter
+    private String text;
+    @Getter
+    @Setter
+    private String sampleAnswer;
 
 }

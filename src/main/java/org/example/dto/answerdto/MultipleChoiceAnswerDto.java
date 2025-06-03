@@ -12,4 +12,5 @@ public class MultipleChoiceAnswerDto {
     private Long examId;
     private Long studentId;
     private Long selectedOptionId;
+    private Integer correctOptionIndex;
 }

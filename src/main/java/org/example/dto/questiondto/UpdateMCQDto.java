@@ -15,4 +15,6 @@ public class UpdateMCQDto {
     private String questionText;
     private Double defaultScore;
     private List<OptionDto> options;
+    private String newText;
+    private Integer correctOptionIndex;
 }

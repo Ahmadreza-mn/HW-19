@@ -12,4 +12,6 @@ public class DescriptiveAnswerDto {
     private Long examId;
     private Long studentId;
     private String answer;
+    private String newText;
+    private String newSampleAnswer;
 }
