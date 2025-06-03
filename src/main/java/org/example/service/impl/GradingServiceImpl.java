@@ -14,32 +14,32 @@ public class GradingServiceImpl implements GradingService {
     }
 
     @Override
-    public void autoMultipleChoiceGrading(Long examId, Long questionId) {
-
+    public void autoGradeMultipleChoice(Long examId, Long questionId) {
+        gradingRepository.autoGradeMultipleChoice(examId, questionId);
     }
 
     @Override
-    public void gradingDescriptiveAnswer(Long questionId, Long examId, Double score) {
-
+    public void gradeDescriptiveAnswer(Long questionId, Long examId, Double score) {
+        gradingRepository.gradeDescriptiveAnswer(questionId, examId, score);
     }
 
     @Override
     public Map<Long, Double> getAnswerGrades(Long studentId, Long examId) {
-        return Map.of();
+        return gradingRepository.getAnswerGrades(studentId, examId);
     }
 
     @Override
     public Double getMaximumScoreForAnswer(Long examId, Long questionId) {
-        return 0.0;
+        return gradingRepository.getMaximumScoreForAnswer(examId, questionId);
     }
 
     @Override
-    public void setTotalScoreOfExamForStudent(Long studentId, Long examId) {
-
+    public void setTotalScoreForStudentExam(Long studentId, Long examId) {
+        gradingRepository.setTotalScoreForStudentExam(studentId, examId);
     }
 
     @Override
-    public Double getScoreOfStudentInExam(Long studentId, Long examId) {
-        return 0.0;
+    public Double getStudentScoreInExam(Long studentId, Long examId) {
+        return gradingRepository.getStudentScoreInExam(studentId, examId);
     }
 }

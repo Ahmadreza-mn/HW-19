@@ -10,6 +10,7 @@ import org.example.service.ExamService;
 import java.util.List;
 
 public class ExamServiceImpl implements ExamService {
+
     private final ExamRepository examRepository;
 
     public ExamServiceImpl(ExamRepository examRepository) {
@@ -32,8 +33,23 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
+    public void addExamToCourse(Long courseId, Long masterId, Exam exam) {
+        examRepository.addExamToCourse(courseId, masterId, exam);
+    }
+
+    @Override
+    public boolean updateExam(Exam exam) {
+        return examRepository.updateExam(exam);
+    }
+
+    @Override
+    public Exam findExamById(Long id) {
+        return examRepository.findById(id);
+    }
+
+    @Override
     public boolean deleteExam(Long id) {
-        return false;
+        return examRepository.deleteExam(id);
     }
 
     @Override
@@ -44,5 +60,15 @@ public class ExamServiceImpl implements ExamService {
     @Override
     public List<DescriptiveQuestion> descriptiveQuestionsOfExam(Long examId) {
         return List.of();
+    }
+
+    @Override
+    public List<MultipleChoiceQuestion> getMultipleChoiceQuestionsByExam(Long examId) {
+        return examRepository.getMultipleChoiceQuestionsByExam(examId);
+    }
+
+    @Override
+    public List<DescriptiveQuestion> getDescriptiveQuestionsByExam(Long examId) {
+        return examRepository.getDescriptiveQuestionsByExam(examId);
     }
 }

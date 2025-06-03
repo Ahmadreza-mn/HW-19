@@ -64,7 +64,7 @@ public class MasterServiceImpl implements MasterService {
 
     @Override
     public boolean checkPassword(Master master, String oldPassword) {
-        // You should hash oldPassword before comparing
+
         return master.getPassword().equals(hashPassword(oldPassword));
     }
 

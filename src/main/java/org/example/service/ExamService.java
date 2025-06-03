@@ -14,9 +14,19 @@ public interface ExamService {
 
     Exam findById(Long id);
 
+    void addExamToCourse(Long courseId, Long masterId, Exam exam);
+
+    boolean updateExam(Exam exam);
+
+    Exam findExamById(Long id);
+
     boolean deleteExam(Long id);
 
     List<MultipleChoiceQuestion> multipleChoiceQuestionsOfExam(Long examId);
 
     List<DescriptiveQuestion> descriptiveQuestionsOfExam(Long examId);
+
+    List<MultipleChoiceQuestion> getMultipleChoiceQuestionsByExam(Long examId);
+
+    List<DescriptiveQuestion> getDescriptiveQuestionsByExam(Long examId);
 }

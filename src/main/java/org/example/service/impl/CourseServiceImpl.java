@@ -11,10 +11,66 @@ import org.example.service.CourseService;
 import java.util.List;
 
 public class CourseServiceImpl implements CourseService {
+
     private final CourseRepository courseRepository;
 
     public CourseServiceImpl(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
+    }
+
+    @Override
+    public void saveCourse(Course course) {
+        courseRepository.save(course);
+    }
+
+    @Override
+    public void updateCourse(Course course) {
+        courseRepository.update(course);
+    }
+
+    @Override
+    public void deleteCourse(Course course) {
+        courseRepository.delete(course);
+    }
+
+    @Override
+    public Course findCourseById(Long courseId) {
+        return courseRepository.findById(courseId);
+    }
+
+    @Override
+    public List<Course> findAllCourses() {
+        return courseRepository.findAll();
+    }
+
+    @Override
+    public void addStudentToCourse(Long courseId, Long studentId) {
+        courseRepository.addStudentToCourse(courseId, studentId);
+    }
+
+    @Override
+    public void removeStudentFromCourse(Long courseId, Long studentId) {
+        courseRepository.removeStudentFromCourse(courseId, studentId);
+    }
+
+    @Override
+    public void addMasterToCourse(Long courseId, Long masterId) {
+        courseRepository.addMasterToCourse(courseId, masterId);
+    }
+
+    @Override
+    public List<MultipleChoiceQuestion> getMultipleChoiceQuestionsByCourse(Long courseId) {
+        return courseRepository.getMultipleChoiceQuestionsByCourse(courseId);
+    }
+
+    @Override
+    public List<DescriptiveQuestion> getDescriptiveQuestionsByCourse(Long courseId) {
+        return courseRepository.getDescriptiveQuestionsByCourse(courseId);
+    }
+
+    @Override
+    public void deleteQuestionFromCourseBank(Long courseId, Long questionId, String questionType) {
+        courseRepository.deleteQuestionFromCourseBank(courseId, questionId, questionType);
     }
 
     @Override
