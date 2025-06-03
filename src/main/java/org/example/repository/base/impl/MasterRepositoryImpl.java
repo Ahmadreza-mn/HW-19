@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class MasterRepositoryImpl implements MasterRepository {
 
-    @PersistenceContext
     private EntityManager entityManager;
 
     @Override
