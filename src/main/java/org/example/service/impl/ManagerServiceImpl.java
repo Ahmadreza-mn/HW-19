@@ -20,7 +20,7 @@ public class ManagerServiceImpl implements ManagerService {
         if (existingAdmin.isEmpty()) {
             Manager admin = new Manager();
             admin.setUsername("admin");
-            admin.setPassword("hashed_password_here"); // hash password properly
+            admin.setPassword("hashed_password_here");
             admin.setRole("ADMIN");
             managerRepository.save(admin);
         }

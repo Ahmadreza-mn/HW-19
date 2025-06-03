@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class QuestionRepositoryImpl implements QuestionRepository {
 
-    @PersistenceContext
+
     private EntityManager entityManager;
 
     @Override
