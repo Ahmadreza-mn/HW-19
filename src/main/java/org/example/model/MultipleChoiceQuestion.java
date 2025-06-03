@@ -31,10 +31,18 @@ public class MultipleChoiceQuestion extends Question {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exam_id")
     private Exam exam;
-
+@Setter
+@Getter
     @Column(nullable = false)
-    private Integer score = 0;
+    private double score = 0;
     private String questionText;
     @Column(name = "correct_option_index")
-    private Integer correctOptionIndex;
+    private int correctOptionIndex;
+
+
+    @Override
+    public Double getScore() {
+        Integer intScore = 0; // calculate or retrieve score as Integer
+        return intScore.doubleValue();
+    }
 }

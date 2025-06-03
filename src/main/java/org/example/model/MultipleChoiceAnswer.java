@@ -10,7 +10,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
 @DiscriminatorValue("MULTIPLE_CHOICE_ANSWER")
 public class MultipleChoiceAnswer extends Answer {
     @ManyToOne
@@ -29,6 +28,9 @@ public class MultipleChoiceAnswer extends Answer {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exam_id")
     private Exam exam;
+
+    public void setSelectedOptionIndex(int i) {
+    }
 }
 
 

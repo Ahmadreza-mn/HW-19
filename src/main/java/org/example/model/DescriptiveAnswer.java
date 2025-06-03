@@ -10,7 +10,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
 @DiscriminatorValue("DESCRIPTIVE_ANSWER")
 public class DescriptiveAnswer extends Answer {
     private String answerText;

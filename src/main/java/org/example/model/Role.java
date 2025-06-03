@@ -21,7 +21,7 @@ public class Role extends BaseEntity<Long> {
     @Getter
     @Column(unique = true, nullable = false)
     private String name;
-    @OneToMany(mappedBy = "role")
+    @OneToMany
     private List<User> users = new ArrayList<>();
 
 
